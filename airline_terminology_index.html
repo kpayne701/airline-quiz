@@ -1,0 +1,204 @@
+<!-- ============================================================
+  Airline Terminology Quiz — self-contained embed
+  Paste this whole block into a SuiteDash HTML/Code content block.
+  No external dependencies, no cookies/localStorage — quiz state is
+  held in memory only and resets if the page is reloaded.
+============================================================= -->
+<div id="attq-root" style="all:initial; display:block; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;">
+<style>
+  #attq-root, #attq-root * { box-sizing: border-box; }
+  #attq-root {
+    --attq-navy:#1A2029; --attq-amber:#B5720E; --attq-amber-bg:#F2E4CE;
+    --attq-green:#2E7D46; --attq-red:#C0392B; --attq-gray-bg:#F4F1EA; --attq-border:#DCD6C7;
+    max-width: 640px; margin: 0 auto; color: var(--attq-navy); line-height:1.5;
+  }
+  #attq-root .attq-card {
+    background:#fff; border:1px solid var(--attq-border); border-radius:12px;
+    padding:28px 26px; box-shadow: 0 1px 3px rgba(26,32,41,0.08);
+  }
+  #attq-root h2.attq-title {
+    font-size:22px; font-weight:700; margin:0 0 4px; color: var(--attq-navy);
+  }
+  #attq-root p.attq-sub { font-size:14px; color:#6b7280; margin:0 0 20px; }
+  #attq-root .attq-select-grid {
+    display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:8px;
+  }
+  #attq-root .attq-mod-btn {
+    text-align:left; background: var(--attq-gray-bg); border:1px solid var(--attq-border);
+    border-radius:8px; padding:14px 14px; cursor:pointer; font-size:14px; font-weight:600;
+    color: var(--attq-navy); transition: all .15s;
+  }
+  #attq-root .attq-mod-btn:hover { border-color: var(--attq-amber); }
+  #attq-root .attq-mod-btn .attq-count { display:block; font-weight:400; font-size:12px; color:#6b7280; margin-top:2px; }
+  #attq-root .attq-all-btn {
+    width:100%; margin-top:10px; background: var(--attq-navy); color:#fff; border:none;
+    border-radius:8px; padding:14px; font-size:14px; font-weight:700; cursor:pointer;
+  }
+  #attq-root .attq-progress {
+    display:flex; justify-content:space-between; font-size:12px; color:#6b7280;
+    font-weight:600; margin-bottom:14px; letter-spacing:.03em;
+  }
+  #attq-root .attq-progress .attq-score { color: var(--attq-amber); }
+  #attq-root .attq-bar { height:6px; background:var(--attq-gray-bg); border-radius:4px; overflow:hidden; margin-bottom:20px; }
+  #attq-root .attq-bar-fill { height:100%; background: var(--attq-amber); transition: width .25s; }
+  #attq-root .attq-question { font-size:18px; font-weight:700; margin-bottom:18px; color:var(--attq-navy); }
+  #attq-root .attq-opt {
+    display:block; width:100%; text-align:left; background:var(--attq-gray-bg);
+    border:1px solid var(--attq-border); border-radius:8px; padding:13px 15px;
+    font-size:14.5px; margin-bottom:9px; cursor:pointer; color:var(--attq-navy); transition: all .12s;
+  }
+  #attq-root .attq-opt:hover:not(:disabled) { border-color: var(--attq-amber); }
+  #attq-root .attq-opt:disabled { cursor:default; }
+  #attq-root .attq-opt.attq-correct { border-color: var(--attq-green); background:#E8F5EC; color:var(--attq-green); font-weight:700; }
+  #attq-root .attq-opt.attq-wrong { border-color: var(--attq-red); background:#FBEAE8; color:var(--attq-red); font-weight:700; }
+  #attq-root .attq-footer { display:flex; justify-content:flex-end; margin-top:6px; }
+  #attq-root .attq-next-btn {
+    background: var(--attq-amber); color:#fff; border:none; border-radius:8px;
+    padding:11px 22px; font-size:14px; font-weight:700; cursor:pointer;
+  }
+  #attq-root .attq-next-btn:hover { filter:brightness(1.06); }
+  #attq-root .attq-back-link {
+    background:none; border:none; color:#6b7280; font-size:13px; cursor:pointer;
+    padding:0; margin-bottom:14px; text-decoration:underline;
+  }
+  #attq-root .attq-summary { text-align:center; padding:10px 0; }
+  #attq-root .attq-ring-wrap { width:150px; height:150px; margin:0 auto 18px; position:relative; }
+  #attq-root .attq-ring-pct {
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-size:28px; font-weight:800; color:var(--attq-navy);
+  }
+  #attq-root .attq-summary h3 { font-size:20px; margin:6px 0 4px; color:var(--attq-navy); }
+  #attq-root .attq-summary p.attq-sub2 { font-size:14px; color:#6b7280; margin:0 0 22px; }
+  #attq-root .attq-btn-row { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+  #attq-root .attq-secondary-btn {
+    background:#fff; border:1px solid var(--attq-border); color:var(--attq-navy);
+    border-radius:8px; padding:11px 20px; font-size:14px; font-weight:600; cursor:pointer;
+  }
+</style>
+
+<div class="attq-card" id="attq-card">
+  <!-- content injected by JS -->
+</div>
+
+<script>
+(function(){
+  var DATA = [{"title": "Aircraft Basics & Layout", "terms": [{"term": "A/C", "def": "Aircraft"}, {"term": "A/C L", "def": "Aircraft Left (facing forward)"}, {"term": "A/C R", "def": "Aircraft Right (facing forward)"}, {"term": "Forward", "def": "The front of the aircraft"}, {"term": "AFT", "def": "The rear of the aircraft"}, {"term": "Nose", "def": "The forward-most tip"}, {"term": "Tail", "def": "The AFT-most section"}, {"term": "Fuselage", "def": "The body of the aircraft"}, {"term": "Cockpit / Flight Deck", "def": "Pilot compartment, flight controls"}, {"term": "Galley", "def": "The \u201ckitchen\u201d of the airplane"}, {"term": "LAV", "def": "The \u201crestroom\u201d of the airplane"}, {"term": "Bulkhead", "def": "Wall dividing cabin sections"}, {"term": "PSU", "def": "Overhead air, light & oxygen panel"}]}, {"title": "Crew Roles & Life on the Line", "terms": [{"term": "CA", "def": "Captain / Pilot in Command"}, {"term": "FO", "def": "First Officer \u2014 Second in Command"}, {"term": "FA", "def": "Flight Attendant"}, {"term": "PIC", "def": "Pilot in Command (the Captain)"}, {"term": "Chief Pilot", "def": "Liaison between line pilots & management"}, {"term": "Check Flight Attendant", "def": "Certified FA who runs IOE & line checks"}, {"term": "IOE", "def": "Initial Operating Experience"}, {"term": "Line Check", "def": "Proficiency check by a Check FA"}, {"term": "Crewmember", "def": "Anyone on duty aboard the aircraft"}, {"term": "CRM", "def": "Crew Resource Management"}, {"term": "Deadheading", "def": "Crew flying off-duty, as a passenger"}, {"term": "Commute", "def": "Traveling from home to your work city"}, {"term": "Crash Pad", "def": "Shared housing for crew in domicile"}, {"term": "Domicile", "def": "Your home-base airport"}, {"term": "Crew Base", "def": "Same as Domicile"}]}, {"title": "Flight Mechanics & Phases", "terms": [{"term": "Taxi", "def": "Aircraft movement on the ground"}, {"term": "Takeoff", "def": "Leaving the ground"}, {"term": "Airborne", "def": "No contact with the ground"}, {"term": "Airspeed", "def": "Speed through the air"}, {"term": "Bank", "def": "Turning or tipping the aircraft"}, {"term": "Autopilot", "def": "Automated flight control"}, {"term": "APU", "def": "Auxiliary Power Unit"}, {"term": "ATC", "def": "Air Traffic Control"}, {"term": "Sterile Cockpit", "def": "No unrelated activity \u2014 critical phases only"}, {"term": "Turbulence", "def": "Bumpy air"}, {"term": "Pressurization", "def": "Keeping cabin air density near ground level"}, {"term": "Decompression", "def": "Loss of cabin pressure"}, {"term": "Block-to-Block", "def": "Gate-to-gate time"}, {"term": "Runway", "def": "Where aircraft take off & land"}, {"term": "Ditching", "def": "A water landing"}]}, {"title": "Flight Types, Routes & Schedules", "terms": [{"term": "Originating City", "def": "Where the trip starts"}, {"term": "Destination City", "def": "Where you're flying to"}, {"term": "Non-Stop Flight", "def": "No stops at all"}, {"term": "Direct Flight", "def": "Stops, but no plane change"}, {"term": "Through Flight", "def": "Enroute stops, same aircraft"}, {"term": "Connection", "def": "Change of planes required"}, {"term": "Leg", "def": "One flight segment"}, {"term": "Layover", "def": "Ground time between legs"}, {"term": "Pairing", "def": "Your city-pair schedule (e.g. DAY\u2013CLT)"}, {"term": "Trip", "def": "A multi-day series of flights"}, {"term": "Out and Back", "def": "Same-day round trip from base"}, {"term": "Charter Flight", "def": "Plane rented for exclusive use"}, {"term": "Ferry Flight", "def": "Flight with no passengers"}, {"term": "REPO", "def": "Reposition flight"}, {"term": "RON", "def": "Remain Overnight"}, {"term": "ETA / ETD", "def": "Est. Time of Arrival / Departure"}]}, {"title": "Documents, Regulations & Systems", "terms": [{"term": "FAA", "def": "Federal Aviation Administration"}, {"term": "FAR", "def": "Federal Aviation Regulation"}, {"term": "CFR", "def": "Code of Federal Regulations"}, {"term": "DOT", "def": "Department of Transportation"}, {"term": "TSA", "def": "Transportation Security Administration"}, {"term": "TSR", "def": "Transportation Security Regulations"}, {"term": "HAZMAT", "def": "Hazardous materials"}, {"term": "SIDA", "def": "Security Identification Display Area"}, {"term": "Airline Certificate", "def": "FAA operating license"}, {"term": "MEL", "def": "Minimum Equipment List"}, {"term": "Air Maintenance Log", "def": "Aircraft's complete maintenance history"}, {"term": "Logbook", "def": "Personal record of flight assignments"}, {"term": "V-File", "def": "Crewmember correspondence file"}, {"term": "DRS", "def": "Direct Reference System"}, {"term": "QIK", "def": "Passenger service & flight-ops software"}, {"term": "IOC", "def": "Operations Control Center"}, {"term": "Wholly Owned Subsidiary", "def": "Independent company under a parent company"}]}, {"title": "Ground Ops, Safety & Passengers", "terms": [{"term": "Ramp", "def": "Ground area where aircraft park"}, {"term": "Jetway", "def": "Covered walkway to the aircraft"}, {"term": "Control Tower", "def": "Controls runway & airport traffic"}, {"term": "Air Traffic", "def": "Aircraft in the air or on the surface"}, {"term": "Jumpseat", "def": "Working-crew-only seat"}, {"term": "PAX", "def": "Passenger"}, {"term": "No Show", "def": "Didn't show, didn't cancel"}, {"term": "UM", "def": "Unaccompanied Minor (age 5\u201314)"}, {"term": "Potable Water", "def": "Safe to drink"}, {"term": "Gray Water", "def": "Non-consumable water"}, {"term": "Air Cargo", "def": "Airfreight and air mail"}, {"term": "Uniform & Image Standards", "def": "Professional appearance standards"}]}];
+  var root = document.getElementById('attq-card');
+  var state = { mod: null, questions: [], idx: 0, score: 0, answered: false };
+
+  function shuffle(arr){
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--){
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  function esc(s){
+    return String(s).replace(/[&<>"']/g, function(m){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];
+    });
+  }
+
+  function buildQuestions(termsList, count){
+    var allDefs = termsList.map(function(t){ return t.def; });
+    var chosen = shuffle(termsList).slice(0, count || termsList.length);
+    return chosen.map(function(t){
+      var distractors = shuffle(allDefs.filter(function(d){ return d !== t.def; })).slice(0, 3);
+      var options = shuffle([t.def].concat(distractors));
+      return { term: t.term, question: 'What does "' + t.term + '" mean?', options: options, correct: t.def };
+    });
+  }
+
+  function renderSelect(){
+    var html = '<h2 class="attq-title">Airline Terminology Quiz</h2>' +
+      '<p class="attq-sub">Pick a module to test yourself, or take the full quiz across all terms.</p>' +
+      '<div class="attq-select-grid">';
+    DATA.forEach(function(m, i){
+      html += '<button class="attq-mod-btn" data-mod="' + i + '">' + esc(m.title) +
+        '<span class="attq-count">' + m.terms.length + ' terms</span></button>';
+    });
+    html += '</div><button class="attq-all-btn" id="attq-all">Take Full Quiz (All ' +
+      DATA.reduce(function(a,m){return a+m.terms.length;},0) + ' Terms)</button>';
+    root.innerHTML = html;
+    Array.prototype.forEach.call(root.querySelectorAll('.attq-mod-btn'), function(btn){
+      btn.addEventListener('click', function(){ startQuiz(parseInt(btn.getAttribute('data-mod'), 10)); });
+    });
+    document.getElementById('attq-all').addEventListener('click', function(){ startQuiz('all'); });
+  }
+
+  function startQuiz(mod){
+    state.mod = mod;
+    if (mod === 'all'){
+      var all = [];
+      DATA.forEach(function(m){ all = all.concat(m.terms); });
+      state.questions = buildQuestions(all, all.length);
+    } else {
+      state.questions = buildQuestions(DATA[mod].terms, DATA[mod].terms.length);
+    }
+    state.idx = 0; state.score = 0; state.answered = false;
+    renderQuestion();
+  }
+
+  function renderQuestion(){
+    if (state.idx >= state.questions.length){ renderSummary(); return; }
+    var q = state.questions[state.idx];
+    var pct = Math.round((state.idx / state.questions.length) * 100);
+    var html = '<button class="attq-back-link" id="attq-back">&larr; Choose a different module</button>' +
+      '<div class="attq-progress"><span>QUESTION ' + (state.idx + 1) + ' / ' + state.questions.length +
+      '</span><span class="attq-score">SCORE ' + state.score + '</span></div>' +
+      '<div class="attq-bar"><div class="attq-bar-fill" style="width:' + pct + '%"></div></div>' +
+      '<div class="attq-question">' + esc(q.question) + '</div><div id="attq-opts"></div>' +
+      '<div class="attq-footer"><button class="attq-next-btn" id="attq-next" style="display:none;">Next &rarr;</button></div>';
+    root.innerHTML = html;
+    document.getElementById('attq-back').addEventListener('click', renderSelect);
+    var optsEl = document.getElementById('attq-opts');
+    state.answered = false;
+    q.options.forEach(function(opt){
+      var b = document.createElement('button');
+      b.className = 'attq-opt';
+      b.textContent = opt;
+      b.addEventListener('click', function(){
+        if (state.answered) return;
+        state.answered = true;
+        var correct = opt === q.correct;
+        if (correct) state.score++;
+        Array.prototype.forEach.call(optsEl.querySelectorAll('.attq-opt'), function(o){
+          o.disabled = true;
+          if (o.textContent === q.correct) o.classList.add('attq-correct');
+          else if (o === b) o.classList.add('attq-wrong');
+        });
+        document.getElementById('attq-next').style.display = 'inline-block';
+      });
+      optsEl.appendChild(b);
+    });
+    document.getElementById('attq-next').addEventListener('click', function(){
+      state.idx++; renderQuestion();
+    });
+  }
+
+  function renderSummary(){
+    var total = state.questions.length;
+    var pct = Math.round((state.score / total) * 100);
+    var r = 64, c = 2 * Math.PI * r, offset = c - (pct / 100) * c;
+    var title = state.mod === 'all' ? 'Full Quiz' : DATA[state.mod].title;
+    var html = '<div class="attq-summary">' +
+      '<div class="attq-ring-wrap"><svg width="150" height="150" viewBox="0 0 150 150" style="transform:rotate(-90deg)">' +
+      '<circle cx="75" cy="75" r="' + r + '" fill="none" stroke="#EDE7D6" stroke-width="12"/>' +
+      '<circle cx="75" cy="75" r="' + r + '" fill="none" stroke="#B5720E" stroke-width="12" stroke-linecap="round" ' +
+      'stroke-dasharray="' + c + '" stroke-dashoffset="' + offset + '"/>' +
+      '</svg><div class="attq-ring-pct">' + pct + '%</div></div>' +
+      '<h3>' + state.score + ' / ' + total + ' correct</h3>' +
+      '<p class="attq-sub2">' + esc(title) + ' · just for practice — nothing is saved or recorded</p>' +
+      '<div class="attq-btn-row"><button class="attq-next-btn" id="attq-retry">Retake This Quiz</button>' +
+      '<button class="attq-secondary-btn" id="attq-choose">Choose a Different Module</button></div></div>';
+    root.innerHTML = html;
+    document.getElementById('attq-retry').addEventListener('click', function(){ startQuiz(state.mod); });
+    document.getElementById('attq-choose').addEventListener('click', renderSelect);
+  }
+
+  renderSelect();
+})();
+</script>
+</div>
